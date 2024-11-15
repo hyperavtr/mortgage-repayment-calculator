@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="./style.css">
+  <title>Frontend Mentor | Mortgage repayment calculator</title>
+  <script defer src="script.js"></script>
+
+</head>
+
+<body>
+  <main class="calc">
+    <form class="calc__form" onsubmit="return false">
+      <!-- header section -->
+      <div class="calc__wrapper-header">
+        <h1 class="calc__header">Mortgage Calculator</h1>
+        <button class="calc__btn-reset" type="reset">Clear All </button>
+      </div>
+      <!-- data input section -->
+      <div class="calc__wrapper-input calc__wrapper-amount">
+        <label class="calc__label" for="amount">Mortgage Amount</label>
+        <div class="calc__wrapper-amount-input">
+          <input class="calc__amount calc__data-input" id="amount" type="text" name="amount" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="calc__wrapper-conditions">
+        <div class="calc__wrapper-input calc__wrapper-term">
+          <label class="calc__label" for="term">Mortgage Term</label>
+          <div class="calc__wrapper-term-input">
+            <input class="calc__term calc__data-input" id="term" type="number" name="term" step="0.01"
+              inputmode="numeric" pattern="[0-9]*" max="50" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+          </div>
+        </div>
+
+        <div class="calc__wrapper-input calc__wrapper-rate">
+          <label class="calc__label" for="rate"> Interest Rate </label>
+          <div class="calc__wrapper-rate-input">
+            <input class="calc__rate calc__data-input" id="rate" type="text" name="rate" step="0.01" inputmode="numeric"
+              max="100"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/^(\d*\.\d*).*$/, '$1').replace(/^0+(\d)/, '$1');">
+          </div>
+        </div>
+      </div>
+      <!-- type of calculation section -->
+      <div class="calc__wrapper-mortgage-type">
+        <!-- Common label for the group -->
+        <span class="calc__label">Mortgage Type</span>
+        <!-- Radio buttons with individual labels -->
+        <div class="calc__wrapper-radio">
+          <input class="calc__mortgage-type calc__mortgage-type--repayment" id="repayment" type="radio"
+            autocomplete="off" name="mortgage-type" aria-label="Repayment">
+          <label class="calc__label calc__label--mortgage-type" for="repayment">Repayment</label>
+        </div>
+        <div class="calc__wrapper-radio">
+          <input class="calc__mortgage-type calc__mortgage-type--interest" id="interest" type="radio" autocomplete="off"
+            name="mortgage-type" aria-label="Interest Only">
+          <label class="calc__label calc__label--mortgage-type" for="interest">Interest Only</label>
+        </div>
+      </div>
+
+      <!--submit button-->
+      <button class="calc__btn-submit" type="submit">Calculate Repayments</button>
+
+    </form>
+    <!-- Empty results start -->
+    <div class="calc__wrapper-results">
+      <section class="calc__results--empty">
+        <img class="calc__precalc-img" src="assets/images/illustration-empty.svg" alt="pre-calculation img">
+        <div class="calc__wrapper-info--empty">
+          <h2 class="calc__header calc__header--results">Results shown here</h2>
+          <p class="calc__info--empty">Complete the form and click “calculate repayments” to see what
+            your monthly repayments would be.</p>
+        </div>
+      </section>
+      <!-- Empty results end -->
+
+      <!-- Completed results start -->
+      - <section class="calc__results--completed state--hidden">
+        <div class="calc__wrapper-info--completed">
+          <h2 class="calc__header calc__header--results">Your results</h2>
+          <p class="calc__info--completed">Your results are shown below based on the information you provided.
+            To adjust the results, edit the form and click “calculate repayments” again.</p>
+        </div>
+        <div class="calc__calculated-results">
+          <div class="calc__wrapper-monthly">
+            <p class="calc__result-caption">Your monthly repayments</p>
+            <span class="calc__monthly"></span>
+          </div>
+          <div class="calc__wrapper-total">
+            <p class="calc__result-caption">Total you'll repay over the term</p>
+            <span class="calc__total"></span>
+          </div>
+        </div>
+      </section>
+
+    </div>
+    <!-- Completed results end -->
+  </main>
+
+</body>
+
+</html>
