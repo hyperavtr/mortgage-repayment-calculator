@@ -40,7 +40,8 @@ function removeErrorMsg(element) {
   }
 }
 
-function changeInputColors(input, bg, color) {
+function changeInputColors(input, border, bg, color) {
+  input.parentElement.style.setProperty("--slate-500", border);
   input.parentElement.style.setProperty("--slate-100", bg);
   input.parentElement.style.setProperty("--slate-700", color);
 }
@@ -54,7 +55,12 @@ function removeCheckedEffectFromRadio() {
 function reset() {
   inputs.forEach((input) => {
     removeErrorMsg(input);
-    changeInputColors(input, "hsl(202, 86%, 94%)", "hsl(200, 24%, 40%)");
+    changeInputColors(
+      input,
+      "hsl(200, 26%, 54%)",
+      "hsl(202, 86%, 94%)",
+      "hsl(200, 24%, 40%)",
+    );
     input.classList.remove("calc__data-input--error");
   });
 
@@ -77,13 +83,12 @@ function OverOutInput(e, action) {
   }
 }
 
-function focusBlurInput(e, action, bg, color) {
-  e.target.classList.remove("calc__data-input--hover");
-  e.target.classList.remove("calc__data-input--error");
-  e.target.classList[action]("calc__data-input--focus");
+function focusBlurInput(input, action, border, bg, color) {
+  input.classList.remove("calc__data-input--hover");
+  input.classList.remove("calc__data-input--error");
+  input.classList[action]("calc__data-input--focus");
 
-  e.target.parentElement.style.setProperty("--slate-100", bg);
-  e.target.parentElement.style.setProperty("--slate-700", color);
+  changeInputColors(input, border, bg, color);
 }
 
 function revertToMaxOrFormat(e) {
@@ -152,10 +157,10 @@ function addErrorText(element) {
   element.appendChild(errorMsg);
 }
 
-function addInputErrorEffect(bg, color) {
+function addInputErrorEffect(border, bg, color) {
   inputs.forEach((input) => {
     if (/^\s*$/.test(input.value)) {
-      changeInputColors(input, bg, color);
+      changeInputColors(input, border, bg, color);
       removeErrorMsg(input);
       addErrorText(input);
     }
@@ -235,12 +240,24 @@ function initializeEventListeners() {
       OverOutInput(e, "remove");
     });
     // Focus and unfocus
-    input.addEventListener("focus", (e) => {
-      focusBlurInput(e, "add", "var(--lime)", "var(--slate-900)");
+    input.addEventListener("focus", () => {
+      focusBlurInput(
+        input,
+        "add",
+        "var(--lime)",
+        "var(--lime)",
+        "var(--slate-900)",
+      );
       removeErrorMsg(input);
     });
-    input.addEventListener("blur", (e) => {
-      focusBlurInput(e, "remove", "hsl(202, 86%, 94%)", "hsl(202, 55%, 16%)");
+    input.addEventListener("blur", () => {
+      focusBlurInput(
+        input,
+        "remove",
+        "hsl(200, 26%, 54%)",
+        "hsl(202, 86%, 94%)",
+        "hsl(202, 55%, 16%)",
+      );
     });
     input.addEventListener("input", (e) => {
       revertToMaxOrFormat(e);
@@ -270,7 +287,7 @@ function initializeEventListeners() {
   btnSubmit.addEventListener("pointerup", () => {
     isRadioValidationPassed = validationRadioCheck();
     if (!validationInputCheck() || !isRadioValidationPassed) {
-      addInputErrorEffect("var(--red)", "var(--white)");
+      addInputErrorEffect("var(--red)", "var(--red)", "var(--white)");
       addRadioErrorEffect();
     } else renderOrClearResult("add", "remove", "row");
   });

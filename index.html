@@ -31,16 +31,15 @@
         <div class="calc__wrapper-input calc__wrapper-term">
           <label class="calc__label" for="term">Mortgage Term</label>
           <div class="calc__wrapper-term-input">
-            <input class="calc__term calc__data-input" id="term" type="number" name="term" step="0.01"
-              inputmode="numeric" pattern="[0-9]*" max="50" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <input class="calc__term calc__data-input" id="term" type="number" name="term" inputmode="numeric"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '');">
           </div>
         </div>
 
         <div class="calc__wrapper-input calc__wrapper-rate">
           <label class="calc__label" for="rate"> Interest Rate </label>
           <div class="calc__wrapper-rate-input">
-            <input class="calc__rate calc__data-input" id="rate" type="text" name="rate" step="0.01" inputmode="numeric"
-              max="100"
+            <input class="calc__rate calc__data-input" id="rate" type="text" name="rate" inputmode="numeric"
               oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/^(\d*\.\d*).*$/, '$1').replace(/^0+(\d)/, '$1');">
           </div>
         </div>

@@ -8,35 +8,28 @@
 	/* COLORS */
 	/* ### Primary */
 	--lime: hsl(61, 70%, 52%);
+	--lime-light: #EBEE9B;
+	--lime-lighter: #F8F9DC;
 	--red: hsl(4, 69%, 50%);
 
 	/* ### Neutral */
+	--slate-50: rgb(154, 190, 213, .25);
 	--white: hsl(0, 0%, 100%);
 	--slate-100: hsl(202, 86%, 94%);
 	--slate-300: hsl(203, 41%, 72%);
+	--slate-350: #85B0CC;
 	--slate-500: hsl(200, 26%, 54%);
 	--slate-700: hsl(200, 24%, 40%);
 	--slate-900: hsl(202, 55%, 16%);
-
-	/* Additional */
-	--lime-light: #EBEE9B;
-	--lime-lighter: #F8F9DC;
-	--slate-50: rgb(154, 190, 213, .25);
 	--slate-1000: #0C202B;
 
 	/* UNITS */
 	--round-corners-wrapper-1: 20px;
 	--round-corners-input: 4px;
-
 	--gap-btwn-label-and-input: 0.6rem;
-
 	--inner-forms-elements-padding: 10.6px;
-	--inner-inputs-labels-padding: calc(var(--inner-forms-elements-padding));
-
 	--trans-time: 0.15s;
-
-	--font-size-default: 1.15rem;
-
+	--font-size-default: 1rem;
 }
 
 * {
@@ -68,7 +61,7 @@ body {
 	border-bottom-right-radius: var(--round-corners-wrapper-1);
 	border-top-left-radius: var(--round-corners-wrapper-1);
 	border-bottom-left-radius: var(--round-corners-wrapper-1);
-	width: min(57.197rem, 100%);
+	width: min(60.197rem, 100%);
 	margin: auto;
 }
 
@@ -94,7 +87,7 @@ body {
 
 .calc__header {
 	font-weight: 600;
-	font-size: 1.7rem;
+	font-size: 1.6rem;
 	color: var(--slate-900);
 }
 
@@ -133,18 +126,15 @@ body {
 .calc__wrapper-amount-input,
 .calc__wrapper-term-input,
 .calc__wrapper-rate-input {
-	position: relative;
 	display: flex;
-	flex-direction: column;
-	gap: var(--gap-btwn-label-and-input);
+	justify-content: center;
+	height: 100%;
 }
 
 /*Captions inside inputs*/
 .calc__wrapper-amount-input::before,
-.calc__wrapper-term-input::before,
-.calc__wrapper-rate-input::before {
-	position: absolute;
-	top: 50%;
+.calc__wrapper-term-input::after,
+.calc__wrapper-rate-input::after {
 	background-color: var(--slate-100);
 	color: var(--slate-700);
 	font-weight: 600;
@@ -152,36 +142,37 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transform: translateY(-50%);
 	transition: ease-in var(--trans-time);
-	height: 97%;
+	height: 43px;
 }
 
 .calc__wrapper-amount-input::before {
 	content: "£";
 	width: 11%;
-	left: 0.08em;
 	border-top-left-radius: var(--round-corners-input);
 	border-bottom-left-radius: var(--round-corners-input);
+	border: 1px solid var(--slate-500);
+	border-right: 0;
 }
 
-.calc__wrapper-term-input::before {
+.calc__wrapper-term-input::after {
 	content: "years";
-	width: 35%;
-	right: 1.3px;
+	width: 50%;
+	border: 1px solid var(--slate-500);
+	border-left: 0;
 }
 
-.calc__wrapper-rate-input::before {
+.calc__wrapper-rate-input::after {
 	content: "%";
-	width: 25%;
-	right: 1.5px;
+	width: 30%;
+	border: 1px solid var(--slate-500);
+	border-left: 0;
 }
 
-.calc__wrapper-term-input::before,
-.calc__wrapper-rate-input::before {
+.calc__wrapper-term-input::after,
+.calc__wrapper-rate-input::after {
 	border-top-right-radius: var(--round-corners-input);
 	border-bottom-right-radius: var(--round-corners-input);
-	transform: translateY(-51%);
 }
 
 /* LABEL */
@@ -195,7 +186,7 @@ body {
 /* LABEL RADIO */
 .calc__label--mortgage-type {
 	font-weight: 600;
-	font-size: 1.24rem;
+	font-size: 1.16rem;
 	color: var(--slate-900);
 }
 
@@ -224,11 +215,20 @@ body {
 	padding-left: min(1rem, 15%);
 	cursor: pointer;
 	width: 100%;
-	font-size: 1.24rem;
+	font-size: 1.16rem;
 }
 
-.calc__amount {
-	padding-left: min(5rem, 15%);
+#amount {
+	border-left: 0;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+}
+
+#term,
+#rate {
+	border-right: 0;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .calc__wrapper-radio:hover {
@@ -363,12 +363,12 @@ body {
 }
 
 .calc__info--empty {
-	color: var(--slate-500);
+	color: var(--slate-350);
 	text-align: center;
 }
 
 .calc__info--completed {
-	color: var(--slate-500);
+	color: var(--slate-350);
 	text-align: left;
 }
 
@@ -452,16 +452,6 @@ body {
 		flex-direction: column;
 	}
 
-	.calc__wrapper-term-input::before {
-		transform: translateY(-50%);
-		height: 97.275%;
-	}
-
-	.calc__wrapper-rate-input::before {
-		transform: translateY(-50%);
-		height: 97.275%;
-	}
-
 	.calc__btn-submit {
 		width: 100%;
 	}
@@ -470,7 +460,6 @@ body {
 		width: 40%;
 	}
 }
-
 
 @media only screen and (max-width:564px) {
 	.calc__precalc-img {
