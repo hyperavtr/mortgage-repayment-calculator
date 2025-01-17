@@ -142,7 +142,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	transition: ease-in var(--trans-time);
-	height: 43px;
+	height: 46px;
 }
 
 .calc__wrapper-amount-input::before {
